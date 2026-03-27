@@ -8,9 +8,11 @@ from pydantic import BaseModel
 from typing import List
 from common.logger import setup_logger
 from common.chaos import ChaosMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Train Service")
 app.add_middleware(ChaosMiddleware)
+Instrumentator().instrument(app).expose(app)
 logger = setup_logger("train-service")
 
 class TrainRoute(BaseModel):

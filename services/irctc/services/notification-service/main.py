@@ -7,9 +7,11 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from common.logger import setup_logger
 from common.chaos import ChaosMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Notification Service")
 app.add_middleware(ChaosMiddleware)
+Instrumentator().instrument(app).expose(app)
 logger = setup_logger("notification-service")
 
 class NotificationReq(BaseModel):
