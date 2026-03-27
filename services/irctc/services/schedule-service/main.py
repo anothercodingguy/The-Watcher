@@ -8,10 +8,12 @@ from pydantic import BaseModel
 from typing import List
 from common.logger import setup_logger
 from common.chaos import ChaosMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 from datetime import datetime
 
 app = FastAPI(title="Schedule Service")
 app.add_middleware(ChaosMiddleware)
+Instrumentator().instrument(app).expose(app)
 logger = setup_logger("schedule-service")
 
 class Schedule(BaseModel):
