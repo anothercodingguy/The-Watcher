@@ -7,9 +7,11 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from fastapi import FastAPI, Request, Response
 from common.logger import setup_logger
 from common.chaos import ChaosMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Gateway Service")
 app.add_middleware(ChaosMiddleware)
+Instrumentator().instrument(app).expose(app)
 logger = setup_logger("gateway-service")
 
 SERVICE_MAPPING = {

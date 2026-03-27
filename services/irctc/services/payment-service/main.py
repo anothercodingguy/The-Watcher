@@ -8,9 +8,11 @@ from pydantic import BaseModel
 import httpx
 from common.logger import setup_logger
 from common.chaos import ChaosMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Payment Service")
 app.add_middleware(ChaosMiddleware)
+Instrumentator().instrument(app).expose(app)
 logger = setup_logger("payment-service")
 
 ORDER_SERVICE_URL = os.getenv("ORDER_SERVICE_URL", "http://order-service:8000")

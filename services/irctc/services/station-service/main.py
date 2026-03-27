@@ -8,10 +8,12 @@ from pydantic import BaseModel
 from typing import List, Optional
 from common.logger import setup_logger
 from common.chaos import ChaosMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 import uuid
 
 app = FastAPI(title="Station Service")
 app.add_middleware(ChaosMiddleware)
+Instrumentator().instrument(app).expose(app)
 logger = setup_logger("station-service")
 
 class Station(BaseModel):

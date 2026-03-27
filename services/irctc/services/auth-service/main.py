@@ -10,9 +10,11 @@ import jwt
 from datetime import datetime, timedelta
 from common.logger import setup_logger
 from common.chaos import ChaosMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Auth Service")
 app.add_middleware(ChaosMiddleware)
+Instrumentator().instrument(app).expose(app)
 logger = setup_logger("auth-service")
 
 SECRET_KEY = "my_super_secret_key"
