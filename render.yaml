@@ -227,6 +227,26 @@ services:
     envVars:
       - key: GEMINI_API_KEY
         sync: false
+      - key: GATEWAY_URL
+        value: https://watcher-gateway.onrender.com
+      - key: USER_SERVICE_URL
+        value: https://watcher-user-service.onrender.com
+      - key: AUTH_SERVICE_URL
+        value: https://watcher-auth-service.onrender.com
+      - key: STATION_SERVICE_URL
+        value: https://watcher-station-service.onrender.com
+      - key: TRAIN_SERVICE_URL
+        value: https://watcher-train-service.onrender.com
+      - key: SCHEDULE_SERVICE_URL
+        value: https://watcher-schedule-service.onrender.com
+      - key: TICKET_SERVICE_URL
+        value: https://watcher-ticket-service.onrender.com
+      - key: ORDER_SERVICE_URL
+        value: https://watcher-order-service.onrender.com
+      - key: PAYMENT_SERVICE_URL
+        value: https://watcher-payment-service.onrender.com
+      - key: NOTIFICATION_SERVICE_URL
+        value: https://watcher-notification-service.onrender.com
 
   - type: web
     name: watcher-ui
