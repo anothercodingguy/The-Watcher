@@ -90,7 +90,7 @@ export default function ScenarioModal({ open, onClose }: ScenarioModalProps) {
   const [localPhase, setLocalPhase] = useState<Phase>("idle");
   const [hasStarted, setHasStarted] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
-  const logEndRef = useRef<HTMLDivElement>(null);
+  const logContainerRef = useRef<HTMLDivElement>(null);
 
   const logs = data?.logs || [];
   const simStatus = data?.status || "idle";
@@ -104,9 +104,10 @@ export default function ScenarioModal({ open, onClose }: ScenarioModalProps) {
     }
   }, [logs, simStatus]);
 
-  // Auto-scroll logs
+  // Auto-scroll logs within container only
   useEffect(() => {
-    logEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = logContainerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [logs.length]);
 
   // Poll faster while running
@@ -288,7 +289,7 @@ export default function ScenarioModal({ open, onClose }: ScenarioModalProps) {
                 Live Simulation Log
                 {isRunning && <span className="ml-auto h-2 w-2 animate-pulse rounded-full bg-[#e67e22]" />}
               </div>
-              <div className="max-h-[220px] overflow-auto px-4 py-3 hide-scrollbar">
+              <div ref={logContainerRef} className="max-h-[220px] overflow-auto px-4 py-3 hide-scrollbar">
                 {logs.map((line, i) => {
                   const isError = line.includes("ERROR") || line.includes("✗") || line.includes("errors");
                   const isSuccess = line.includes("✓") || line.includes("complete") || line.includes("Complete");
@@ -312,7 +313,6 @@ export default function ScenarioModal({ open, onClose }: ScenarioModalProps) {
                     </div>
                   );
                 })}
-                <div ref={logEndRef} />
               </div>
             </div>
           )}

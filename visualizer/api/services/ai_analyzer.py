@@ -1,8 +1,7 @@
 import json
 import os
 
-from google import genai
-from google.genai import types
+from groq import Groq
 from services.prometheus_client import instant_query
 
 SERVICES = [
@@ -103,24 +102,22 @@ async def ask_ai(question: str) -> dict:
         f"- Service health:\n{json.dumps(analysis['service_health'], indent=2)}"
     )
 
-    gemini_api_key = os.getenv("GEMINI_API_KEY")
-    if not gemini_api_key:
-        # Fallback to heuristic response if no API key
+    groq_api_key = os.getenv("GROQ_API_KEY")
+    if not groq_api_key:
         return _fallback_response(question, analysis)
 
     try:
-        client = genai.Client(api_key=gemini_api_key)
-        response = client.models.generate_content(
-            model="gemini-2.5-flash-lite",
-            contents=question,
-            config=types.GenerateContentConfig(
-                system_instruction=system_prompt,
-                max_output_tokens=300,
-            ),
+        client = Groq(api_key=groq_api_key)
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": question},
+            ],
+            max_tokens=300,
         )
-        answer = response.text
-    except Exception as e:
-        # Fallback on error
+        answer = response.choices[0].message.content
+    except Exception:
         return _fallback_response(question, analysis)
 
     return {

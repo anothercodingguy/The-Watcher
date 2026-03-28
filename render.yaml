@@ -225,7 +225,7 @@ services:
     dockerfilePath: ./deploy/render/Dockerfile.visualizer-api
     dockerContext: ./visualizer/api
     envVars:
-      - key: GEMINI_API_KEY
+      - key: GROQ_API_KEY
         sync: false
       - key: GATEWAY_URL
         value: https://watcher-gateway.onrender.com

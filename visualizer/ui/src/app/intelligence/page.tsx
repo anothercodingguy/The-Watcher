@@ -203,7 +203,7 @@ export default function IntelligencePage() {
               <div className="dashboard-card-subtle p-4">
                 <div className="mb-2 text-[12px] font-semibold text-[color:var(--text-muted)]">3. Reason</div>
                 <p className="text-[13px] leading-5 text-[color:var(--text-secondary)]">
-                  Gemini 2.5 Flash Lite receives the full service health context and answers natural language queries. Falls back to keyword heuristics without an API key.
+                  Groq LLaMA 3.1 8B receives the full service health context and answers natural language queries. Falls back to keyword heuristics without an API key.
                 </p>
               </div>
             </div>
@@ -287,11 +287,11 @@ export default function IntelligencePage() {
             <div className="mt-4 space-y-3 text-[12px]">
               <div className="flex items-center justify-between border-b border-[color:var(--card-border)] pb-3">
                 <span className="text-[color:var(--text-muted)]">Provider</span>
-                <span className="font-semibold text-[color:var(--text-primary)]">Google Gemini</span>
+                <span className="font-semibold text-[color:var(--text-primary)]">Groq</span>
               </div>
               <div className="flex items-center justify-between border-b border-[color:var(--card-border)] pb-3">
                 <span className="text-[color:var(--text-muted)]">Model</span>
-                <span className="font-semibold text-[color:var(--text-primary)]">Gemini 2.5 Flash Lite</span>
+                <span className="font-semibold text-[color:var(--text-primary)]">LLaMA 3.1 8B Instant</span>
               </div>
               <div className="flex items-center justify-between border-b border-[color:var(--card-border)] pb-3">
                 <span className="text-[color:var(--text-muted)]">Max Tokens</span>
