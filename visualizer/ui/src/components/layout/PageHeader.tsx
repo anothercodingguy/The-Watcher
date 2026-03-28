@@ -14,9 +14,9 @@ interface PageHeaderProps {
 }
 
 const RANGE_OPTIONS: Array<{ value: MetricsRange; label: string }> = [
-  { value: "15m", label: "Daily" },
-  { value: "1h", label: "Weekly" },
-  { value: "6h", label: "Monthly" },
+  { value: "15m", label: "Last 15 min" },
+  { value: "1h", label: "Last 1 hour" },
+  { value: "6h", label: "Last 6 hours" },
 ];
 
 const STATE_ICON: Record<string, ElementType> = {
@@ -63,15 +63,7 @@ export default function PageHeader({
 
       {showControls ? (
         <div className="flex flex-wrap items-center justify-end gap-2">
-          <span className="rounded-[14px] border px-4 py-2 text-[13px] font-medium" style={{ borderColor: "var(--card-border)", background: "var(--control-bg)", color: "var(--text-secondary)" }}>
-            Jan 01 - Jul 31
-          </span>
-          <span className="text-[13px]" style={{ color: "var(--text-muted)" }}>compared to</span>
-          <span className="rounded-[14px] border px-4 py-2 text-[13px] font-medium" style={{ borderColor: "var(--card-border)", background: "var(--control-bg)", color: "var(--text-secondary)" }}>
-            Aug 01 - Dec 31
-          </span>
-
-          <label className="dashboard-select inline-flex items-center gap-2 pr-3">
+<label className="dashboard-select inline-flex items-center gap-2 pr-3">
             <select
               value={selectedRange}
               onChange={(e) => handleRangeChange(e.target.value as MetricsRange)}

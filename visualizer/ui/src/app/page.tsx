@@ -115,7 +115,7 @@ export default function SystemOverviewPage() {
 
           <section className="glass-card p-5">
             <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-[34px] font-medium tracking-[-0.05em] text-[color:var(--text-primary)]">Payments</h3>
+              <h3 className="text-[16px] font-semibold tracking-[-0.04em] text-[color:var(--text-primary)]">Service Latency (p95)</h3>
             </div>
             <div style={{ height: 280 }}>
               <LatencyChart range={range} />

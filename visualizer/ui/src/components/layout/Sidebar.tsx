@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/layout/ThemeToggle";
 
 const navItems = [
-  { label: "Home", href: "/" },
+  { label: "Overview", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Logs", href: "/logs" },
   { label: "Traces", href: "/traces" },
@@ -18,8 +18,15 @@ export default function Sidebar() {
   return (
     <header className="flex flex-wrap items-center justify-between gap-4 border-b px-4 py-4 md:px-8 md:py-5" style={{ borderColor: "var(--card-border)" }}>
       <Link href="/" className="flex items-center gap-2.5">
-        <div className="flex h-7 w-7 items-center justify-center rounded-[8px] border shadow-sm" style={{ borderColor: "var(--card-border)", background: "var(--control-bg)" }}>
-          <div className="h-3.5 w-3.5 rounded-[4px] border-2" style={{ borderColor: "var(--accent)" }} />
+        <div className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-gradient-to-br from-amber-500 to-orange-600 shadow-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="4" />
+            <line x1="12" y1="2" x2="12" y2="6" />
+            <line x1="12" y1="18" x2="12" y2="22" />
+            <line x1="2" y1="12" x2="6" y2="12" />
+            <line x1="18" y1="12" x2="22" y2="12" />
+          </svg>
         </div>
         <span className="text-[26px] font-semibold tracking-[-0.03em]" style={{ color: "var(--text-primary)" }}>
           The Watcher
@@ -49,7 +56,6 @@ export default function Sidebar() {
 
       <div className="flex items-center gap-3">
         <ThemeToggle />
-        <div className="h-11 w-11 rounded-full border" style={{ borderColor: "var(--card-border)", background: "var(--control-bg)" }} />
       </div>
     </header>
   );

@@ -23,7 +23,7 @@ export default function TracesPage() {
       <PageHeader
         title="Traces"
         subtitle="Jaeger trace summaries with backend-driven service discovery and lookback controls"
-        showControls
+        showControls={false}
       />
 
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">

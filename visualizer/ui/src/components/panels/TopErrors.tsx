@@ -55,7 +55,7 @@ export default function TopErrors() {
                   <span className="h-2 w-2 rounded-full bg-[#de6f72]" />
                   <span className="truncate">{svc.name}</span>
                 </div>
-                <span className="font-semibold text-[color:var(--text-secondary)]">{(svc.error_rate * 100).toFixed(2)}%</span>
+                <span className="font-semibold text-[color:var(--text-secondary)]">{svc.error_rate.toFixed(2)}%</span>
               </div>
             ))}
           </div>
