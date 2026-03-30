@@ -19,8 +19,8 @@ The-Watcher is an AI-driven observability pipeline designed for high-availabilit
 (See the structure section below for full details)
 
 ## Quick Start
-1. **Deploy Infra:** `make install-deps` (Installs K3s, Prometheus, Loki, Jaeger).
-2. **Start Services:** `kubectl apply -f infrastructure/k8s/deployments/`.
+1. **Deploy Infra:** `make install-deps` (Installs Minikube, Prometheus, Loki, Jaeger).
+2. **Start Services:** `kubectl apply -f services/irctc/k8s/`.
 3. **Run Attack:** `cd load-tests && k6 run scenarios/booking_flow.js`.
 4. **Watch Remediation:** Access the Visualizer at `localhost:3000`.
 5. **Detailed setup guide:** Refer `SETUP_AND_RUN.md`

@@ -1,0 +1,12 @@
+{
+  "name": "watcher",
+  "version": "1.0.0",
+  "description": "The Watcher - AI-Driven Observability",
+  "scripts": {
+    "dev:ui": "cd visualizer/ui && npm run dev",
+    "dev:api": "cd visualizer/api && fastapi dev main.py"
+  },
+  "dependencies": {
+    "onnxruntime-web": "^1.24.3"
+  }
+}
