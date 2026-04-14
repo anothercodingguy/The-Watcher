@@ -43,6 +43,8 @@ spec:
           value: "http://jaeger-service:16686"
         - name: PUSHGATEWAY_URL
           value: "http://pushgateway-service:9091"
+        - name: EVENT_BUS_URL
+          value: "nats://nats-service:4222"
         - name: REMEDIATION_ENABLED
           value: "true"
         - name: PREDICTIVE_SCALING_ENABLED
@@ -96,6 +98,8 @@ spec:
           value: "http://jaeger-service:16686"
         - name: PUSHGATEWAY_URL
           value: "http://pushgateway-service:9091"
+        - name: EVENT_BUS_URL
+          value: "nats://nats-service:4222"
         - name: REMEDIATION_ENABLED
           value: "true"
         - name: PREDICTIVE_SCALING_ENABLED
@@ -149,6 +153,8 @@ spec:
           value: "http://jaeger-service:16686"
         - name: PUSHGATEWAY_URL
           value: "http://pushgateway-service:9091"
+        - name: EVENT_BUS_URL
+          value: "nats://nats-service:4222"
         - name: REMEDIATION_ENABLED
           value: "true"
         - name: PREDICTIVE_SCALING_ENABLED
@@ -202,6 +208,8 @@ spec:
           value: "http://jaeger-service:16686"
         - name: PUSHGATEWAY_URL
           value: "http://pushgateway-service:9091"
+        - name: EVENT_BUS_URL
+          value: "nats://nats-service:4222"
         - name: REMEDIATION_ENABLED
           value: "true"
         - name: PREDICTIVE_SCALING_ENABLED

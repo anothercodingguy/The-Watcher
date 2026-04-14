@@ -155,6 +155,15 @@ services:
     networks:
       - train-ticket-net
 
+  nats:
+    image: nats:2.10-alpine
+    ports:
+      - "4222:4222"
+      - "8222:8222"  # monitoring
+    command: --jetstream --http_port 8222
+    networks:
+      - train-ticket-net
+
   edge-remedy:
     build:
       context: ../../edge-remedy
@@ -164,6 +173,7 @@ services:
       - LOKI_URL=http://loki:3100
       - JAEGER_URL=http://jaeger:16686
       - PUSHGATEWAY_URL=http://pushgateway:9091
+      - EVENT_BUS_URL=nats://nats:4222
       - REMEDIATION_ENABLED=false
       - CIRCUIT_BREAKER_ENABLED=false
       - PREDICTIVE_SCALING_ENABLED=true
@@ -173,6 +183,23 @@ services:
       - loki
       - jaeger
       - pushgateway
+      - nats
+    networks:
+      - train-ticket-net
+
+  langgraph-brain:
+    build:
+      context: ./services/langgraph-brain
+    ports:
+      - "8082:8080"
+    environment:
+      - EVENT_BUS_URL=nats://nats:4222
+      - PROMETHEUS_URL=http://prometheus:9090
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    depends_on:
+      - nats
+      - prometheus
     networks:
       - train-ticket-net
 
@@ -182,11 +209,10 @@ services:
     ports:
       - "8081:8080"
     environment:
-      - PORT=8081
-      - "8081:8081"
       - PROMETHEUS_URL=http://prometheus:9090
       - LOKI_URL=http://loki:3100
       - JAEGER_URL=http://jaeger:16686
+      - GATEWAY_URL=http://gateway-service:8000
       - GEMINI_API_KEY=${GEMINI_API_KEY}
     depends_on:
       - prometheus

@@ -14,20 +14,42 @@ spec:
         app: langgraph-brain
     spec:
       containers:
-      - name: langgraph-api
-        # Mock deployment referencing the NLP Brain fixing the codebase on deep path violations
-        image: python:3.11-slim 
+      - name: langgraph-brain
+        image: langgraph-brain:latest
+        imagePullPolicy: Never
         command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
         env:
         - name: EVENT_BUS_URL
           value: "nats://nats-service:4222"
-        - name: OPENAI_API_KEY
+        - name: PROMETHEUS_URL
+          value: "http://prometheus-service:9090"
+        - name: GEMINI_API_KEY
           valueFrom:
             secretKeyRef:
-              name: openai-secret
-              key: api-key
+              name: watcher-secrets
+              key: gemini-api-key
+              optional: true
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: watcher-secrets
+              key: github-token
+              optional: true
         ports:
         - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 320Mi
 ---
 apiVersion: v1
 kind: Service
